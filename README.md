@@ -4,7 +4,7 @@
 
 ## Uso
 - Configurar el archivo mockupForm.json según los resultados que espera el formulario a replicar.
-- Configurar HOSTNAME, PATH y los parámetros a mandar.
+- Configurar los parámetros de la conexión y las propiedades a enviar en el archivo `config.js`.
 - `node cli.js [numero_de_envios]` Por defecto se envían 10.000 formularios.
 - NOTA: se pueden abrir múltiples consolas de NodeJS para enviar más peticiones en simultáneo.
 

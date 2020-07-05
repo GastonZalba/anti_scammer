@@ -2,47 +2,35 @@ const https = require('http');
 const querystring = require('querystring');
 
 const FakeUser = require('./FakeUser.js');
-// Mockup de datos que espera el server
-let mockupForm = require('./data/mockupForm.json');
 
-
-const HOSTNAME = 'provincia-home-ar.com';
-const PATH = '/login.php?p=login';
-
-
-const prepareForm = () => {
-    
-    let form = Object.assign({}, mockupForm);
-
-    // Revisar constructor de la clase para ver todos las propiedades existentes
-    let user = new FakeUser();
-
-    // Modificar estos datos según requiera el mockup
-    form.docNumber = user.dni;
-    form.nickname = user.username;
-    form.gender = (user.gender === 'M') ? 'Masculino' : 'Femenino';
-    form.password = user.password;
-
-    return form;
-}
-
+const { prepareForm, config } = require('./config.js');
 
 const sendForm = async formData => {
 
     // Pantallazo de la data a enviar
     console.log(formData);
 
-    formData = querystring.stringify(formData);
+    let contentType;
+
+    // Ajustar si el server espera petición en json
+    let isJSON = false;
+
+    if (isJSON) {
+        formData = JSON.stringify(formData);
+        contentType = 'application/json';
+    } else {
+        formData = querystring.stringify(formData);
+        contentType = 'application/x-www-form-urlencoded';
+    }
 
     let options = {
-        hostname: HOSTNAME,
-        path: PATH,
-        port: 80,
+        hostname: config.hostname,
+        path: config.path,
+        port: config.port,
         method: 'POST',
         headers: {
             'User-Agent': 'Mozilla/5.0',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            // 'Content-Type': 'application/json',
+            'Content-Type': contentType,
             'Content-Length': formData.length
         }
     }
@@ -51,7 +39,12 @@ const sendForm = async formData => {
 
         const req = https.request(options, (res) => {
 
-            console.log('Enviando.', 'Estado:', res.statusCode);
+            let status = res.statusCode;
+
+            let headers = res.headers;
+
+            console.log('Estado:', status);
+            console.log('Headers:', headers);
 
             res.setEncoding('utf8');
             res.on('data', (data) => {
@@ -83,12 +76,15 @@ const sendNumber = args[0] || 10000;
     try {
 
         for (let i = 0; i < sendNumber; i++) {
-           
-            let form = prepareForm();
+
+            // Revisar constructor de la clase para ver todos las propiedades existentes
+            let user = new FakeUser();
+
+            let form = prepareForm(user);
 
             let send = await sendForm(form);
 
-            console.log('Envío Nº:', i+1, HOSTNAME + PATH);
+            console.log('Envío Nº:', i + 1);
 
         }
 
@@ -96,7 +92,7 @@ const sendNumber = args[0] || 10000;
 
     } catch (err) {
         console.log('Envío falló');
-        console.error(err.message);
+        console.error(err);
     }
 
 })()
