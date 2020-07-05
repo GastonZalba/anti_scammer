@@ -1,7 +1,7 @@
 {
   "name": "anti_scammer",
   "version": "0.0.1",
-  "description": "Utilidad para enviar datos basura a sitios web que hacen suplantación de indentidad (pishing) que contengan formularios solicitando datos personales y bancarios",
+  "description": "Utilidad para enviar datos basura a sitios web que hacen suplantación de identidad (pishing) que contengan formularios solicitando datos personales y bancarios",
   "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

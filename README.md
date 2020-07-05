@@ -1,6 +1,6 @@
 # anti_scammer
 
- Utilidad para enviar datos basura a sitios web que hacen suplantación de indentidad ([pishing](https://es.wikipedia.org/wiki/Phishing)) que contengan formularios solicitando datos personales y bancarios. El objetivo de esta herramienta es saturar con información que se vea creíble y sea indistinguible de la real, siendo en verdad puro ruido aleatorio y artificial. Inspirado por este [video](https://www.youtube.com/watch?v=UtNYzv8gLbs).
+ Utilidad para enviar datos basura a sitios web que hacen suplantación de identidad ([pishing](https://es.wikipedia.org/wiki/Phishing)) que contengan formularios solicitando datos personales y bancarios. El objetivo de esta herramienta es saturar con información que se vea creíble y sea indistinguible de la real, siendo en verdad puro ruido aleatorio y artificial. Inspirado por este [video](https://www.youtube.com/watch?v=UtNYzv8gLbs).
 
 ## Uso
 - Configurar el archivo mockupForm.json según los resultados que espera el formulario a replicar.
