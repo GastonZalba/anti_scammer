@@ -3,7 +3,8 @@ let mockupForm = require('./data/mockupForm.json');
 const config = {
     "hostname": 'provincia-home-ar.com',
     "path": '/login.php?p=login',
-    "port": 80
+    "port": 80,
+    "isJSON": false // Si el servidor no espera petición en json, es urlencoded.
 }
 
 /**

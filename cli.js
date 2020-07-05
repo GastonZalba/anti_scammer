@@ -12,10 +12,7 @@ const sendForm = async formData => {
 
     let contentType;
 
-    // Ajustar si el server espera petición en json
-    let isJSON = false;
-
-    if (isJSON) {
+    if (config.isJSON) {
         formData = JSON.stringify(formData);
         contentType = 'application/json';
     } else {
