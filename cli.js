@@ -37,7 +37,7 @@ const sendForm = async formData => {
         const req = https.request(options, (res) => {
 
             let status = res.statusCode;
-
+            
             let headers = res.headers;
 
             console.log('Estado:', status);
@@ -51,8 +51,7 @@ const sendForm = async formData => {
         })
 
         req.on('error', (err) => {
-            console.log(err)
-            reject(err.message);
+            reject(new Error(err.errno));
         });
 
         req.write(formData);
@@ -88,8 +87,7 @@ const sendNumber = args[0] || 10000;
         console.log('Envío terminado');
 
     } catch (err) {
-        console.log('Envío falló');
-        console.error(err);
+        console.error('Envío falló:', err.message);
     }
 
 })()
